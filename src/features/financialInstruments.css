@@ -1,33 +1,38 @@
 table {
     width: 50%;
     margin: 3% 0 auto;
-    height: 30vh;
+    height: 20vh;
     border-spacing: 1px;
 }
 
-td {
+td,
+th {
     border: 1px solid grey;
 }
 
-.header{
+.header {
     display: flex;
-    background-color: navy;
+    background-color: #00467d;
     color: white;
     margin: 10px 0 10px 0;
 }
 
-.Commodities{
+.commodities {
     background-color: white;
 }
-.Equities{
+
+.equities {
     background-color: #3e7bf7;
 }
-.Credit{
+
+.credit {
     background-color: green;
 }
-.positivePrice{
+
+.positivePrice {
     color: blue;
 }
-.negativePrice{
+
+.negativePrice {
     color: red;
 }

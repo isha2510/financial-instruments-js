@@ -2,11 +2,8 @@ export const sortData = (key, data) => {
     const sortedData = [...data];
     switch (key) {
         case 'assetClass':
-
             sortedData.sort((a, b) => {
                 let order = ['Commodities', 'Equities', 'Credit']
-                console.log(a.assetClass)
-                console.log(b.assetClass)
                 const indexofA = order.indexOf(a.assetClass);
                 const indexofB = order.indexOf(b.assetClass);
                 return indexofA - indexofB;
