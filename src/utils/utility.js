@@ -20,3 +20,23 @@ export const sortData = (key, data) => {
     }
     return sortedData;
 };
+
+export const setBackgroundColor = (params) => {
+   return params.data.assetClass.toLowerCase();
+}
+
+export const sortByAssetClass = (valueA, valueB) => {
+    let order = ['Commodities', 'Equities', 'Credit']
+    const indexofA = order.indexOf(valueA);
+    const indexofB = order.indexOf(valueB);
+    return indexofA - indexofB;
+}
+
+export const priceColor = (params) => {
+    if (params.value > 0) {
+        return { color: 'blue' }
+    }
+    return { color: 'red' }
+}
+
+

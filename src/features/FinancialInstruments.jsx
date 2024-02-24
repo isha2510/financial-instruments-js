@@ -1,56 +1,47 @@
-import { useEffect, useState } from 'react';
-import { sortData } from '../utils/utility';
-import { SortButton } from '../components/Button';
+import { useEffect, useMemo, useState } from 'react';
+import { priceColor, setBackgroundColor, sortByAssetClass, sortData } from '../utils/utility';
 import './financialInstruments.css';
 import { getData } from '../services/DataService';
+import { AgGridReact } from 'ag-grid-react'; // AG Grid Component
+import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the grid
+import "ag-grid-community/styles/ag-theme-balham.css"; // Optional Theme applied to the grid
+
 
 const ShowFinancialInstruments = () => {
-    const [financialInstrumentsData, setFinancialInstrumentsData] = useState([]);
-    const headers = [{ key: 'ticker', lable: 'Ticker' },
-    { key: 'price', lable: 'Price' },
-    { key: 'assetClass', lable: 'Asset Class' }]
-    useEffect(() => {
-        let data=getData();
-        setFinancialInstrumentsData(data)
-    }, []);
+    const [rowData, setRowData] = useState([]);
+    const [colDefs, setColDefs] = useState([
+        { field: "ticker", flex: 1, sortingOrder: ['asc', null] },
+        { field: "price", flex: 1, sortingOrder: ['desc', null], cellStyle: priceColor },
+        { field: "assetClass", flex: 1, comparator: sortByAssetClass }
+    ]);
 
-    const handleClick = (key) => {
-        setFinancialInstrumentsData(sortData(key, financialInstrumentsData));
+    const gridOptions = {
+        getRowClass: setBackgroundColor,
+        suppressRowHoverHighlight: true
     }
 
+    useEffect(() => {
+        let data = getData();
+        setRowData(data);
+    }, []);
+
+
+
     return (
-        <>
-            {(financialInstrumentsData && financialInstrumentsData.length > 0) ?
-                <table>
-                    <thead>
-                        <tr>
-                            {headers.map((row) => {
-                                return <th key={row.key}>{row.lable}
-                                    <SortButton
-                                        onClick={() => handleClick(row.key)}
-                                    /></th>
-                            })}
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        {financialInstrumentsData.map((row) => {
-                            return (
-                                <tr key={row.ticker} className={row.assetClass.toLowerCase()}>
-                                    <td data-testid="ticker">{row.ticker}</td>
-                                    <td className={row.price > 0 ? 'positivePrice' : 'negativePrice'} data-testid="price">{row.price}</td>
-                                    <td data-testid="assetClass">{row.assetClass}</td>
-                                </tr>
-                            )
-                        })}
-
-                    </tbody>
-                </table>
-                : <div>
-                    <span data-testid="noData">No Instruments available</span></div>}
-        </>
+        // wrapping container with theme & size
+        <div className='container'>
+            <div
+                className="ag-theme-balham default-grid-size" // applying the grid theme
+            // the grid will fill the size of the parent container
+            >
+                <AgGridReact
+                    rowData={rowData}
+                    columnDefs={colDefs}
+                    gridOptions={gridOptions}
+                />
+            </div>
+        </div>
     )
-
 }
 
 export default ShowFinancialInstruments;

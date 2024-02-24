@@ -1,13 +1,7 @@
-table {
-    width: 50%;
-    margin: 3% 0 auto;
-    height: 20vh;
-    border-spacing: 1px;
-}
-
-td,
-th {
-    border: 1px solid grey;
+.default-grid-size {
+    height: 22rem;
+    width: 50rem;
+    text-align: left;
 }
 
 .header {
@@ -18,15 +12,15 @@ th {
 }
 
 .commodities {
-    background-color: white;
+    background-color: white !important;
 }
 
 .equities {
-    background-color: #3e7bf7;
+    background-color: #1e9fd9 !important;
 }
 
 .credit {
-    background-color: green;
+    background-color: #7bc57b !important;
 }
 
 .positivePrice {
@@ -35,4 +29,9 @@ th {
 
 .negativePrice {
     color: red;
+}
+
+.container {
+    margin: 2rem;
+    padding: 1rem;
 }
