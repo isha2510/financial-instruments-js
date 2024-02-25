@@ -48,6 +48,11 @@
     "ticker": "BETA",
     "price": 4042.333392570424,
     "assetClass": "Commodities"
+  },
+  {
+    "ticker": "BCOMTR",
+    "price": 4062.333392570424,
+    "assetClass": "Commodities"
   }
 ]
 

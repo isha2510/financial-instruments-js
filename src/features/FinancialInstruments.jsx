@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { priceColor, setBackgroundColor, sortByAssetClass, sortData } from '../utils/utility';
 import './financialInstruments.css';
 import { getData } from '../services/DataService';
@@ -10,19 +10,24 @@ import "ag-grid-community/styles/ag-theme-balham.css"; // Optional Theme applied
 const ShowFinancialInstruments = () => {
     const [rowData, setRowData] = useState([]);
     const [colDefs, setColDefs] = useState([
-        { field: "ticker", flex: 1, sortingOrder: ['asc', null] },
-        { field: "price", flex: 1, sortingOrder: ['desc', null], cellStyle: priceColor },
-        { field: "assetClass", flex: 1, comparator: sortByAssetClass }
+        { field: "ticker", sortingOrder: ['asc', null] },
+        { field: "price", sortingOrder: ['desc', null], cellStyle: priceColor },
+        { field: "assetClass", comparator: sortByAssetClass }
     ]);
 
-    const gridOptions = {
-        getRowClass: setBackgroundColor,
-        suppressRowHoverHighlight: true,
-    }
+    const defaultColDef = useMemo(() => {
+        return {
+            flex: 1
+        }
+    }, [])
 
-    useEffect(() => {
+    const onGridReady = useCallback(() => {
         let data = getData();
         setRowData(data);
+    }, []);
+
+    const paginationPageSizeSelector = useMemo(() => {
+        return [10, 15, 20];
     }, []);
 
 
@@ -30,15 +35,20 @@ const ShowFinancialInstruments = () => {
     return (
         // wrapping container with theme & size
         <div className='container'>
-            {rowData && rowData.length > 0 ?
-                <div className="ag-theme-balham default-grid-size">
-                    <AgGridReact
-                        rowData={rowData}
-                        columnDefs={colDefs}
-                        gridOptions={gridOptions}
-                    />
-                </div>
-                : <div><span>No Instruments Available</span></div>}
+            <div className="ag-theme-balham default-grid-size">
+                <AgGridReact
+                    rowData={rowData}
+                    columnDefs={colDefs}
+                    defaultColDef={defaultColDef}
+                    pagination={true}
+                    onGridReady={onGridReady}
+                    getRowClass={setBackgroundColor}
+                    suppressRowHoverHighlight={true}
+                    paginationPageSize={10}
+                    paginationPageSizeSelector={paginationPageSizeSelector}
+                />
+            </div>
+
         </div >
     )
 }

@@ -1,0 +1,78 @@
+[
+    {
+      "ticker": "test1",
+      "price": 1234,
+      "assetClass": "Credit"
+    },
+    {
+      "ticker": "test2",
+      "price": -2345,
+      "assetClass": "Commodities"
+    },
+    {
+      "ticker": "test3",
+      "price": 3456,
+      "assetClass": "Equities"
+    },
+    {
+      "ticker": "test4",
+      "price": -4567,
+      "assetClass": "Credit"
+    },
+    {
+      "ticker": "test5",
+      "price": 5678,
+      "assetClass": "Commodities"
+    },
+    {
+      "ticker": "test6",
+      "price": -6789,
+      "assetClass": "Equities"
+    },
+    {
+      "ticker": "test7",
+      "price": 7890,
+      "assetClass": "Credit"
+    },
+    {
+      "ticker": "test8",
+      "price": -8901,
+      "assetClass": "Commodities"
+    },
+    {
+      "ticker": "test9",
+      "price": 9012,
+      "assetClass": "Equities"
+    },
+    {
+      "ticker": "test10",
+      "price": -10123,
+      "assetClass": "Credit"
+    },
+    {
+      "ticker": "test11",
+      "price": 11111,
+      "assetClass": "Commodities"
+    },
+    {
+      "ticker": "test12",
+      "price": -12222,
+      "assetClass": "Equities"
+    },
+    {
+      "ticker": "test13",
+      "price": 13333,
+      "assetClass": "Credit"
+    },
+    {
+      "ticker": "test14",
+      "price": -14444,
+      "assetClass": "Commodities"
+    },
+    {
+      "ticker": "test15",
+      "price": 15555,
+      "assetClass": "Equities"
+    }
+  ]
+  
