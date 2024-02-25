@@ -17,7 +17,7 @@ const ShowFinancialInstruments = () => {
 
     const gridOptions = {
         getRowClass: setBackgroundColor,
-        suppressRowHoverHighlight: true
+        suppressRowHoverHighlight: true,
     }
 
     useEffect(() => {
@@ -30,17 +30,16 @@ const ShowFinancialInstruments = () => {
     return (
         // wrapping container with theme & size
         <div className='container'>
-            <div
-                className="ag-theme-balham default-grid-size" // applying the grid theme
-            // the grid will fill the size of the parent container
-            >
-                <AgGridReact
-                    rowData={rowData}
-                    columnDefs={colDefs}
-                    gridOptions={gridOptions}
-                />
-            </div>
-        </div>
+            {rowData && rowData.length > 0 ?
+                <div className="ag-theme-balham default-grid-size">
+                    <AgGridReact
+                        rowData={rowData}
+                        columnDefs={colDefs}
+                        gridOptions={gridOptions}
+                    />
+                </div>
+                : <div><span>No Instruments Available</span></div>}
+        </div >
     )
 }
 

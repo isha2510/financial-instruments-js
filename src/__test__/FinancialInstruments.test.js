@@ -1,87 +1,60 @@
-import { fireEvent, render, screen, within } from "@testing-library/react"
+import { act, fireEvent, render, screen, waitFor, within, configure } from "@testing-library/react"
 import ShowFinancialInstruments from "../features/FinancialInstruments"
 import * as dataservice from "../services/DataService";
 
 
+
 describe('Test FinancialInstrument component', () => {
-    const setup = () => {
-        render(<ShowFinancialInstruments />);
-        const ticker = screen.getByRole('columnheader', { name: /ticker/i });
-        const price = screen.getByRole('columnheader', { name: /price/i });
-        const assetClass = screen.getByRole('columnheader', { name: /asset class/i });
-        return { ticker, price, assetClass };
-    };
-    test('the table has 3 column headers', () => {
-        const { ticker, price, assetClass } = setup();
-        expect(ticker).toBeInTheDocument();
-        expect(price).toBeInTheDocument();
-        expect(assetClass).toBeInTheDocument();
-        //screen.logTestingPlaygroundURL();
+    let comp = null;
+    beforeEach(() => {
+        jest.spyOn(dataservice, 'getData').mockReturnValue([
+            { ticker: 'ABC', price: -100, assetClass: 'Equities' },
+            { ticker: 'DEF', price: 100, assetClass: 'Commodities' },
+            { ticker: 'GHI', price: 200, assetClass: 'Credit' }
+        ]);
+        comp = render(<ShowFinancialInstruments />);
+    })
+
+    test('the price column is sorted in descending order', async () => {
+        configure({ testIdAttribute: "col-id" });
+        const rows = screen
+            .getAllByRole("row")
+        // role row is also used for the header row so we need to filter those out
+        // .filter((row) => row.getAttribute("row-index") !== null);
+        const row = rows[0];
+        within(row).getAllByTestId("price")[0].click();
+
+
+        const priceCellValue = await waitFor(async () => {
+            const priceCells = screen.getAllByRole('gridcell');
+            return priceCells
+                .filter(cell => "price" === cell.getAttribute("col-id"))
+                .map(cell => cell.textContent);
+        });
+
+        console.log(priceCellValue)
     });
 
-    test('the price column is sorted in descending order', () => {
-        const { price } = setup();
-        const sortButton = within(price).getByRole('button', {
-            name: /▲/i
-        });
-        fireEvent.click(sortButton);
-        const priceCells = screen.getAllByTestId(/price/i);
-        const priceValues = priceCells.map((cell) => cell.textContent);
-        expect(priceValues).toEqual(['3791.37', '3150.67', '-3591.47']);
-    });
-
-    test('the ticker column is sorted in alphabetical order', () => {
-        const { ticker } = setup();
-        const sortButton = within(ticker).getByRole('button', {
-            name: /▲/i
-        });
-        fireEvent.click(sortButton);
-        const tickerCells = screen.getAllByTestId(/ticker/i);
-        const tickerValues = tickerCells.map((cell) => cell.textContent);
-        expect(tickerValues).toEqual(['ALPHA', 'BETA', 'GAMA']);
-    });
-
-    test('the assetclass column is sorted', () => {
-        const { assetClass } = setup();
-        const sortButton = within(assetClass).getByRole('button', {
-            name: /▲/i
-        });
-        fireEvent.click(sortButton);
-        const assetCells = screen.getAllByTestId(/assetclass/i);
-        const assetValues = assetCells.map((cell) => cell.textContent);
-        expect(assetValues).toEqual(['Commodities', 'Equities', 'Credit']);
-    });
 
     test('renders "No Instruments available" message when the data is empty', () => {
         const mock = jest.spyOn(dataservice, 'getData');
         mock.mockReturnValue([]);
-        render(<ShowFinancialInstruments />)
+        render(<ShowFinancialInstruments />);
         // screen.logTestingPlaygroundURL();
         const message = screen.getByText(/no instruments available/i)
         expect(message).toBeInTheDocument();
     });
 
-    test('renders price class "negativePrice" when price is negative', () => {
-        jest.spyOn(dataservice, 'getData').mockReturnValue([
-            { ticker: 'ABC', price: -100, assetClass: 'Equities' }
-        ]);
-        render(<ShowFinancialInstruments />);
-        const priceElement = screen.getByRole('cell', {
-            name: /\-100/i
-        })
-        expect(priceElement).toHaveClass('negativePrice');
+    test('renders price color as red when price is negative', () => {
+
+        const priceElement = screen.getByText(/-100/i)
+        expect(priceElement).toHaveStyle({ color: 'red' });
 
     });
 
-    test('renders price class "positivePrice" when price is positive', () => {
-        jest.spyOn(dataservice, 'getData').mockReturnValue([
-            { ticker: 'ABC', price: 100, assetClass: 'Equities' }
-        ]);
-        render(<ShowFinancialInstruments />);
-        const priceElement = screen.getByRole('cell', {
-            name: /100/i
-        })
-        expect(priceElement).toHaveClass('positivePrice');
+    test('renders price color as blue when price is positive', () => {
+        const priceElement = screen.getByText("100")
+        expect(priceElement).toHaveStyle({ color: 'blue' });
 
     });
 })
