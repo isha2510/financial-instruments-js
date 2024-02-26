@@ -1,19 +1,59 @@
 [
-    {
-      "ticker": "ALPHA",
-      "price": 3150.67, 
-      "assetClass": "Credit"
-    }, 
-    {
-      "ticker": "BETA",
-      "price": 3791.37,
-      "assetClass": "Equities"
-    },
-    {
-        "ticker": "GAMA",
-        "price": -3591.47,
-        "assetClass": "Commodities"
-      }
+  {
+    "ticker": "KAPPA",
+    "price": 1559.46,
+    "assetClass": "Credit"
+  },
+  {
+    "ticker": "GAMA",
+    "price": 3511.900,
+    "assetClass": "Commodities"
+  },
+  {
+    "ticker": "ETA",
+    "price": -1161.15,
+    "assetClass": "Credit"
+  },
+  {
+    "ticker": "THETA",
+    "price": 2436.80,
+    "assetClass": "Equities"
+  },
+  {
+    "ticker": "EPSILON",
+    "price": -4261.6725,
+    "assetClass": "Commodities"
+  },
+  {
+    "ticker": "ALPHA",
+    "price": 4988.35,
+    "assetClass": "Equities"
+  },
+  {
+    "ticker": "ZETA",
+    "price": -1570.301,
+    "assetClass": "Equities"
+  },
+  {
+    "ticker": "IOTA",
+    "price": 1650.68,
+    "assetClass": "Commodities"
+  },
+  {
+    "ticker": "DELTA",
+    "price": 3092.86,
+    "assetClass": "Credit"
+  },
+  {
+    "ticker": "BETA",
+    "price": 4042.333,
+    "assetClass": "Commodities"
+  },
+  {
+    "ticker": "BCOMTR",
+    "price": 4062.33,
+    "assetClass": "Commodities"
+  }
+]
 
-  ]
   

@@ -1,20 +1,28 @@
 table {
+    margin: 3% 0 0 10px;
+    border-spacing: 0;
+    border: 1px solid grey;
+}
+.instruments{
     width: 50%;
-    margin: 3% 0 auto;
-    height: 20vh;
-    border-spacing: 1px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    
 }
 
 td,
 th {
-    border: 1px solid grey;
+    border-bottom: 1px solid grey;
+    text-align: center;
 }
 
-.header {
-    display: flex;
-    background-color: #00467d;
-    color: white;
-    margin: 10px 0 10px 0;
+thead{
+    color: rgba(0, 0, 0, 0.54);
+    font-weight: 600;
+    box-sizing: border-box;
+    background-color: #f5f7f7;
 }
 
 .commodities {

@@ -2,3 +2,9 @@
     background: white;
     border: none;
 }
+
+.sort button:hover{
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}

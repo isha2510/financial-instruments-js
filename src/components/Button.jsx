@@ -1,10 +1,10 @@
 import './button.css'
-export const SortButton=({onClick})=> {
-    return (
-      <button className="sort"
-        onClick={onClick}
-      >
-        ▲
-      </button>
-    );
-  }
+export const Button = ({ onClick, icon, className }) => {
+  return (
+    <button className={className}
+      onClick={onClick}
+    >
+      {icon}
+    </button>
+  );
+}
