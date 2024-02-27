@@ -94,14 +94,25 @@ describe('pagination', () => {
     });
     test('renders pagination', () => {
         //screen.logTestingPlaygroundURL();
+        expect(screen.getByText(/Page 1 of 3/i)).toBeInTheDocument();
         expect(screen.getByRole('button', { name: /</i })).toBeInTheDocument();
         expect(screen.getByRole('button', { name: />/i })).toBeInTheDocument();
     });
     test('renders next page records when clicked on next page button', () => {
         const nextButton = screen.getByRole('button', { name: />/i });
-        act(() => { userEvent.click(nextButton)});
+        act(() => { userEvent.click(nextButton) });
+        expect(screen.getByText(/Page 2 of 3/i)).toBeInTheDocument();
         expect(screen.getByRole('cell', { name: /test6/i })).toBeInTheDocument();
         expect(screen.getByRole('cell', { name: /test10/i })).toBeInTheDocument();
+    });
+    test('renders previous page records when clicked on previous page button', () => {
+        const nextButton = screen.getByRole('button', { name: />/i });
+        act(() => { userEvent.click(nextButton) });
+        const prevButton = screen.getByRole('button', { name: /</i });
+        act(() => userEvent.click(prevButton));
+        expect(screen.getByText(/Page 1 of 3/i)).toBeInTheDocument();
+        expect(screen.getByRole('cell', { name: /test1/i })).toBeInTheDocument();
+        expect(screen.getByRole('cell', { name: /test5/i })).toBeInTheDocument();
     })
 
 })

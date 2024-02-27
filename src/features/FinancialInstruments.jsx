@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { sortData } from '../utils/utility';
-import { Button } from '../components/Button';
+import { Button } from '../components/Button/Button';
 import './financialInstruments.css';
 import { getData } from '../services/DataService';
-import { Pagination } from '../components/Pagination';
+import { Pagination } from '../components/Pagination/Pagination';
 
 const ShowFinancialInstruments = () => {
     const [financialInstrumentsData, setFinancialInstrumentsData] = useState([]);

@@ -1,4 +1,4 @@
-import { Button } from "./Button";
+import { Button } from "../Button/Button";
 import './pagination.css';
 
 export const Pagination = ({ currentPage, totalRecords, handlePageChange, recordsPerPage }) => {
