@@ -3,7 +3,7 @@
     border: none;
 }
 
-.sort button:hover{
+.sort:hover{
     text-decoration: underline;
     color: blue;
     cursor: pointer;

@@ -1,6 +1,7 @@
-import { getData } from "../services/DataService"
+import { getData } from "../services/DataService";
+import financialData from "../utils/data.json";
 
 test('get the Financial Instruments data', () => {
     let data=getData();
-    expect(data.length).toEqual(3);
+    expect(data.length).toEqual(financialData.length);
 })

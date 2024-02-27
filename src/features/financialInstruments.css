@@ -2,6 +2,8 @@ table {
     margin: 3% 0 0 10px;
     border-spacing: 0;
     border: 1px solid grey;
+    border-collapse: collapse;
+    font-family: Roboto;
 }
 .instruments{
     width: 50%;
@@ -26,15 +28,15 @@ thead{
 }
 
 .commodities {
-    background-color: white;
+    background-color: white !important;
 }
 
 .equities {
-    background-color: #3e7bf7;
+    background-color: #1e9fd9 !important;
 }
 
 .credit {
-    background-color: green;
+    background-color: #7bc57b !important;
 }
 
 .positivePrice {
