@@ -1,12 +1,12 @@
-##Financial Instruments Table
+# Financial Instruments Table
 
-#Features:
-Sorting:
+## Features:
+### Sorting:
 by “Asset Class”: Commodities first, then Equities and Credit last.
 by “Price” in descending order
 by “Ticker” in alphabetical order
 
-Color Scheme:
+### Color Scheme:
 The table rows are color coded on the basis of "Asset Class"-
 -Commodities: white
 -Equities: Blue
@@ -14,11 +14,11 @@ The table rows are color coded on the basis of "Asset Class"-
 "Price" will be blue if positive and red if negative
 
 
-#What are we using
+## What are we using
 Project was created using create-react-app
 JavaScript
 
-#To Run the application follow below steps:
+## To Run the application follow below steps:
 
 ### `npm install`:
 It will install all the project related dependencies
