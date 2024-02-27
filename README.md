@@ -12,13 +12,24 @@ Before you get started, make sure you have the following installed:
 To Run the application follow below mentioned steps
 
 ### `npm install`:
-Clone the repository and run the 'npm install' command ,It will install all the project related dependencies.
+Clone the repository and run the 
+```bash
+npm install
+```
+It will install all the project related dependencies.
 
 ### `npm start`:
-Once all the dependencies are installed run the 'npm start' command, It Runs the app in the development mode.
+Once all the dependencies are installed run the 
+```bash
+npm start
+```
+It Runs the app in the development mode.
 Open http://localhost:3000 to view it in your browser.
 
 ### `npm test`:
+```bash
+npm test
+```
 Launches the test runner in the interactive watch mode.
 
 ## What are we using
