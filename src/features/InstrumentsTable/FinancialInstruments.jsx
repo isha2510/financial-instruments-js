@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { sortData } from '../utils/utility';
-import { Button } from '../components/Button/Button';
+import { useSelector } from 'react-redux';
+import { Button } from '../../components/Button/Button';
+import { Pagination } from '../../components/Pagination/Pagination';
+import { Search } from '../../components/Search/Search';
+import { sortData } from '../../utils/utility';
 import './financialInstruments.css';
-import { getData } from '../services/DataService';
-import { Pagination } from '../components/Pagination/Pagination';
 
 const ShowFinancialInstruments = () => {
+    const data = useSelector((state) => state.instruments.instruments);
     const [financialInstrumentsData, setFinancialInstrumentsData] = useState([]);
     const [currentPage, setCurrentpage] = useState(1);
     let recordsPerPage = 5;
@@ -15,15 +17,12 @@ const ShowFinancialInstruments = () => {
     const headers = [{ key: 'ticker', lable: 'Ticker' },
     { key: 'price', lable: 'Price' },
     { key: 'assetClass', lable: 'Asset Class' }]
-    
 
     useEffect(() => {
-        let data = getData();
         setFinancialInstrumentsData(data);
-    }, []);
+    }, [data]);
 
-    
-    
+
     if (financialInstrumentsData.length > 0) {
         filteredData = financialInstrumentsData.slice(startIndex, endIndex);
     }
@@ -37,10 +36,25 @@ const ShowFinancialInstruments = () => {
 
     }
 
+    const handleSearchText = (searchText) => {
+        if (searchText.length === 0) {
+            setFinancialInstrumentsData(data);
+        } else {
+            searchText = searchText.toLowerCase();
+            const filtteredArray = financialInstrumentsData.filter((val) => {
+                const value = Object.values(val).join(",");
+                return value.toLowerCase().includes(searchText);
+            });
+            //const filtteredArray = financialInstrumentsData.filter((val) => val.assetClass.toLowerCase().includes(searchText) || val.price.toString().includes(searchText) || val.ticker.toLowerCase().includes(searchText));
+            setFinancialInstrumentsData(filtteredArray);
+        }
+    }
+
     return (
         <>
             {(financialInstrumentsData && financialInstrumentsData.length > 0) ?
                 <div className='instruments'>
+                    <Search searchText={handleSearchText} />
                     <table>
                         <thead>
                             <tr>
